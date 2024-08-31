@@ -74,7 +74,7 @@ public class Main {
         public void run() {
             for (int guess = 0; guess < MAX_PASSWORD; guess++) {
                 if (vault.isCorrectPassword(guess)) {
-                    System.out.println(this.getName() + "Acertou a senha. " + guess);
+                    System.out.println(this.getName() + " Acertou a senha. " + guess);
                     System.exit(0);
                 }
             }
@@ -91,8 +91,10 @@ public class Main {
         @Override
         public void run() {
             for (int guess = MAX_PASSWORD; guess >= 0; guess--) {
-                System.out.println(this.getName() + "acertou a senha. " + guess);
-                System.exit(0);
+                if(vault.isCorrectPassword(guess)) {
+                    System.out.println(this.getName() + " acertou a senha. " + guess);
+                    System.exit(0);
+                }
             }
         }
 
@@ -101,16 +103,16 @@ public class Main {
     public static class PoliceThread extends Thread {
         @Override
         public void run() {
-            for(int i = 10 ; i > 0; i--){
+            for(int i = 10 ; i >= 0; i--){
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     System.out.println("Erro em " + Thread.currentThread().getName());
                 }
-                System.out.print(i);
+                System.out.println(i);
             }
             System.out.println("Game over.");
-            System.out.println(0);
+            System.exit(0);
         }
 
     }
